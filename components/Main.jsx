@@ -1,48 +1,62 @@
 import React from 'react'
-import {FaLinkedinIn, FaGithub } from 'react-icons/fa'
+import {FaLinkedinIn, FaGithub} from 'react-icons/fa'
 import {AiOutlineMail} from 'react-icons/ai'
-import {BsYoutube} from 'react-icons/bs'
+import {HiArrowDown} from 'react-icons/hi'
 
 const Main = () => {
   return (
-    <div id='home' className='w-full h-screen text-center'>
-        <div className='max-w-[1240px] w-full h-full mx-auto p-2 flex justify-center items-center'>
-            <div>
-                <p className='uppercase text-sm tracking-wideset text-[#ffffff]'>
-                    <b>Let's Build something together!</b>
+    <div id='home' className='w-full h-screen flex items-center justify-center relative'>
+        <div className='max-w-[1240px] w-full mx-auto px-6'>
+            <div className='animate-fade-in-up'>
+                <p className='text-xs uppercase tracking-[0.3em] text-neutral-400 dark:text-neutral-500 mb-6 transition-colors duration-500'>
+                    Software Engineer
                 </p>
-                <h1 className='py-4 text-[#ffffff] '>
-                    Hi, I'm <span className='text-transparent bg-clip-text bg-gradient-to-r from-purple-700 to-purple-400'>Vamsee</span>
+            </div>
+
+            <div className='animate-fade-in-up-delay opacity-0'>
+                <h1 className='font-light leading-tight'>
+                    Vamsee Cheruvu
                 </h1>
-                <h1 className='py-2 text-[#ffffff]'>
-                    A <span className='text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-blue-400'>Full-Stack </span> Web Developer
-                </h1>
-                <p className='py-6 text-[#ffffff] max-w-[70%] m-auto'>
-                    I'm a full-stack web <span className='font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-800 to-red-500'>developer </span> specializing in building, and <span className='font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-orange-200'>designing </span> 
-                    exceptional digital experiences primarily focussed in <span className='font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-green-200'>Artficial Intelligence</span>.
-                    Currently, I'm working on building responsive <span className='font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-200'>frontend</span> web applications 
-                    while learning <span className='font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-700 to-purple-400'>backend </span> 
-                    technologies.
+            </div>
+
+            <div className='animate-fade-in-up-delay-2 opacity-0'>
+                <p className='mt-6 text-neutral-500 max-w-[500px] leading-relaxed'>
+                    Prev. @ Google, JPMorgan Chase. CS + Business at The Ohio State University.
+                    Building software that matters.
                 </p>
-                <div className='flex items-center justify-between max-w-[260px] m-auto py-6'>
-                    <a href="https://www.linkedin.com/in/vamsee-cheruvu-077784217/">
-                        <div className='rounded-full shadow-md shadow-gray-400 p-6 cursor-pointer hover:scale-110 ease-in duration-150'>
-                            <FaLinkedinIn />
-                        </div>
+            </div>
+
+            <div className='animate-fade-in-up-delay-3 opacity-0'>
+                <div className='flex items-center gap-4 mt-10'>
+                    <a href='https://www.linkedin.com/in/vamseecheruvu/' target='_blank' rel='noreferrer'
+                       className='border border-neutral-200 dark:border-white/10 rounded-full p-4
+                         text-neutral-400 hover:text-neutral-900 dark:hover:text-white
+                         hover:border-neutral-400 dark:hover:border-white/40
+                         hover:-translate-y-1 transition-all duration-300'>
+                        <FaLinkedinIn size={16} />
                     </a>
-                    <a href="https://github.com/VamseeC21?tab=repositories">
-                    <div className='rounded-full shadow-md shadow-gray-400 p-6 cursor-pointer hover:scale-110 ease-in duration-150'>
-                        <FaGithub />
-                    </div>
+                    <a href='https://github.com/vamseec21' target='_blank' rel='noreferrer'
+                       className='border border-neutral-200 dark:border-white/10 rounded-full p-4
+                         text-neutral-400 hover:text-neutral-900 dark:hover:text-white
+                         hover:border-neutral-400 dark:hover:border-white/40
+                         hover:-translate-y-1 transition-all duration-300'>
+                        <FaGithub size={16} />
                     </a>
-                    <div className='rounded-full shadow-md shadow-gray-400 p-6 cursor-pointer hover:scale-110 ease-in duration-150'>
-                        <AiOutlineMail />
-                    </div>
-                    {/* <div className='rounded-full shadow-md shadow-purple-400 p-6 cursor-pointer hover:scale-110 ease-in duration-150'>
-                        <BsYoutube />
-                    </div> */}
+                    <a href='mailto:vmcheruvu@gmail.com'
+                       className='border border-neutral-200 dark:border-white/10 rounded-full p-4
+                         text-neutral-400 hover:text-neutral-900 dark:hover:text-white
+                         hover:border-neutral-400 dark:hover:border-white/40
+                         hover:-translate-y-1 transition-all duration-300'>
+                        <AiOutlineMail size={16} />
+                    </a>
                 </div>
             </div>
+        </div>
+
+        <div className='absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce'>
+            <a href='/#about'>
+                <HiArrowDown size={20} className='text-neutral-400 dark:text-neutral-600' />
+            </a>
         </div>
     </div>
   )

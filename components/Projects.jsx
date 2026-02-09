@@ -7,32 +7,31 @@ import ProjectItem from './ProjectItem'
 
 const Projects = () => {
   return (
-    <div id='projects' className='w-full bg-[#150d38]'>
-        <div className='max-w-[1240px] mx-auto px-2 py-16'>
-        <p className='font-bold uppercase text-xl tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-orange-100'><b>Projects</b></p>
-            <h2 className='py-4'>What I've Built</h2>
-            
-            <div className='grid md:grid-cols-2 gap-8'>
-              <ProjectItem 
-                title='PEER (Peer Editing and Efficiency Bot) ' 
+    <div id='projects' className='w-full py-24 px-6 bg-secondary'>
+        <div className='max-w-[1240px] mx-auto'>
+            <p className='section-heading'>Projects</p>
+            <div className='divider mb-10' />
+            <h2 className='mb-12 font-light'>What I've built</h2>
+
+            <div className='grid md:grid-cols-2 gap-6'>
+              <ProjectItem
+                title='PEER'
+                subtitle='Peer Editing and Efficiency Bot'
                 backgroundImg={peerImage}
                 projectUrl='/peer'
-                tech='Discord.py' 
+                tech='Discord.py / GPT-3'
               />
-              <ProjectItem 
-                title='Marvel ChatBot' 
+              <ProjectItem
+                title='Marvel ChatBot'
+                subtitle='AI-Powered Superhero Conversations'
                 backgroundImg={marvelImage}
-                projectUrl='/marvelChatbot' 
-                tech='GPT-3'
+                projectUrl='/marvelChatbot'
+                tech='Flask / GPT-3'
               />
-              {/* project item empty will go here */}
-              
             </div>
-
-
         </div>
     </div>
   )
 }
 
-export default Projects;
+export default Projects

@@ -1,146 +1,148 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import React, {useState, useEffect} from 'react'
 import {AiOutlineClose, AiOutlineMenu, AiOutlineMail} from 'react-icons/ai'
 import {FaGithub, FaLinkedinIn} from 'react-icons/fa'
-import {BsYoutube, BsPersonFill, BsGearFill} from 'react-icons/bs'
-import {AiFillHome} from 'react-icons/ai'
-import {GiGears} from 'react-icons/gi'
-import {BiCategory} from 'react-icons/bi'
-import logoVMC from '/public/LogosForPersonalWebsite/V-removebg-preview-2.png'
+import {HiSun, HiMoon} from 'react-icons/hi'
+import {useTheme} from '../context/ThemeContext'
 
 const Navbar = () => {
     const [nav, setNav] = useState(false)
-    const [shadow, setShadow] = useState(false) 
-    
+    const [scrolled, setScrolled] = useState(false)
+    const {darkMode, toggleTheme} = useTheme()
+
     const handleNav = () => {
         setNav(!nav)
     }
 
     useEffect(()=> {
-        const handleShadow = () => {
-            if (window.scrollY >= 90) {
-                setShadow(true)
-            }
-            else {
-                setShadow(false)
-            }
+        const handleScroll = () => {
+            setScrolled(window.scrollY >= 50)
         }
-        window.addEventListener('scroll', handleShadow)
+        window.addEventListener('scroll', handleScroll)
+        return () => window.removeEventListener('scroll', handleScroll)
     },[])
-  
+
   return (
-    <div className={shadow ? 'fixed w-full h-20 shadow-xl z-[100] bg-gray-900': 'fixed w-full h-20 z-[100] bg-gray-900'}>
-        <div className='flex justify-between items-center w-full h-full px-2 2xl:px-16 cursor-pointer'>
+    <div className={`fixed w-full h-16 z-[100] transition-all duration-500 ${
+      scrolled
+        ? 'bg-neutral-50/90 dark:bg-[#0a0a0a]/90 backdrop-blur-md border-b border-neutral-200 dark:border-white/5'
+        : 'bg-transparent'
+    }`}>
+        <div className='flex justify-between items-center w-full h-full max-w-[1240px] mx-auto px-6'>
             <Link href='/#home'>
-                <Image 
-                    src={logoVMC}
-                    alt="/" 
-                    width='125' 
-                    height='75'
-                />
+                <span className='text-lg font-light tracking-[0.2em] cursor-pointer text-neutral-900 dark:text-white hover:opacity-60 transition-all duration-300'>
+                    VC
+                </span>
             </Link>
-            
-            <div>
-                <ul className='hidden md:flex mr-15 text-[#c3bdbd]'>
+
+            <div className='flex items-center gap-6'>
+                <ul className='hidden md:flex items-center gap-8'>
                     <Link href='/'>
-                    <li className='flex items-end ml-10 text-xl uppercase hover:text-white'>
-                        <b className='px-2.5 underline'>Home</b>
-                        <AiFillHome color = '#0ea5e9' size={30}/>
-                    </li>
+                        <li className='text-sm tracking-widest text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors duration-300'>
+                            Home
+                        </li>
                     </Link>
-
                     <Link href='/#about'>
-                    <li className='flex items-end ml-10 text-xl uppercase hover:text-white'>
-                        <b className='px-2.5 underline'>About</b>
-                        <BsPersonFill color= '#facc15' size={30}/>
-                    </li>
+                        <li className='text-sm tracking-widest text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors duration-300'>
+                            About
+                        </li>
                     </Link>
-
+                    <Link href='/#experience'>
+                        <li className='text-sm tracking-widest text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors duration-300'>
+                            Experience
+                        </li>
+                    </Link>
                     <Link href='/#skills'>
-                    <li className='flex items-end ml-10 text-xl uppercase hover:text-white'>
-                        <b className='px-2.5 underline'>Skills</b>
-                        <GiGears color= '#14b8a6' size={30}/>
-                    </li>
-                    </Link>
-
-                    <Link href='/#projects'>
-                    <li className='flex items-end ml-10 text-xl uppercase hover:text-white'>
-                        <b className='px-2.5 underline'>Projects</b>
-                        <BiCategory color= '#a855f7' size={30}/>
-                    </li>
+                        <li className='text-sm tracking-widest text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors duration-300'>
+                            Skills
+                        </li>
                     </Link>
                 </ul>
 
-                <div onClick = {handleNav} className='md:hidden pr-5 rounded-full shadow-md shadow-gray-500 p-5 cursor-pointer'>
-                    <AiOutlineMenu size={18} />
+                {/* Theme toggle */}
+                <button
+                    onClick={toggleTheme}
+                    className='relative w-9 h-9 flex items-center justify-center rounded-full
+                        bg-transparent border border-neutral-200 dark:border-white/10
+                        hover:border-neutral-400 dark:hover:border-white/30
+                        text-neutral-600 dark:text-neutral-400
+                        hover:text-neutral-900 dark:hover:text-white
+                        transition-all duration-300'
+                    aria-label='Toggle theme'
+                >
+                    <div className={`absolute transition-all duration-500 ${darkMode ? 'opacity-0 rotate-90 scale-0' : 'opacity-100 rotate-0 scale-100'}`}>
+                        <HiSun size={16} />
+                    </div>
+                    <div className={`absolute transition-all duration-500 ${darkMode ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-90 scale-0'}`}>
+                        <HiMoon size={16} />
+                    </div>
+                </button>
+
+                <div onClick={handleNav} className='md:hidden cursor-pointer p-2'>
+                    <AiOutlineMenu size={18} className='text-neutral-500' />
                 </div>
             </div>
         </div>
 
-        <div className={nav ? 'md:hidden fixed left-0 top-0 w-full h-screen bg-black/70' : ''}>
-            <div className={
-                nav 
-                    ? 'fixed left-0 top-0 w-[75%] sm:w-[60%] md:w-[45%] h-screen bg-gray-700 p-10 eas-in duration-500'
-                    : 'fixed left-[-100%] top-0 p-10 eas-in duration-500'}>
+        {/* Mobile overlay */}
+        <div
+            className={`md:hidden fixed left-0 top-0 w-full h-screen transition-all duration-500 ${
+                nav ? 'bg-black/60 dark:bg-black/80 backdrop-blur-sm pointer-events-auto' : 'pointer-events-none'
+            }`}
+            onClick={handleNav}
+        >
+            <div
+                className={`fixed left-0 top-0 w-[70%] sm:w-[55%] h-screen
+                    bg-neutral-50 dark:bg-[#0a0a0a] border-r border-neutral-200 dark:border-white/5
+                    p-8 transition-transform duration-500 ease-out
+                    ${nav ? 'translate-x-0' : '-translate-x-full'}`}
+                onClick={(e) => e.stopPropagation()}
+            >
                 <div>
                     <div className='flex w-full items-center justify-between'>
-                        <Image src={logoVMC} width='125' height ='75' alt = '/' />
-                        <div onClick = {handleNav} className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer'>
-                            <AiOutlineClose />
+                        <span className='text-lg font-light tracking-[0.2em] text-neutral-900 dark:text-white'>VC</span>
+                        <div onClick={handleNav} className='cursor-pointer p-2 text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors'>
+                            <AiOutlineClose size={16} />
                         </div>
                     </div>
-                    <div className='border-b border-gray-300 my-4'>
-                        <p className='w-[85%] md:w-[90%] py-4'>Let's build something legendary together!</p>
-                    </div>
+                    <div className='border-b border-neutral-200 dark:border-white/10 my-6' />
                 </div>
-                
-                <div className='py-4 flex flex-col'>
-                    <ul>
+
+                <div className='flex flex-col'>
+                    <ul className='space-y-6'>
                         <Link href='/#home'>
-                            <li onClick={()=> setNav(false)} className='py-4 text-sm'>Home</li>
+                            <li onClick={()=> setNav(false)} className='text-sm tracking-widest text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors'>Home</li>
                         </Link>
-
                         <Link href='/#about'>
-                            <li onClick={()=> setNav(false)} className='py-4 text-sm'>About</li>
+                            <li onClick={()=> setNav(false)} className='text-sm tracking-widest text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors'>About</li>
                         </Link>
-
+                        <Link href='/#experience'>
+                            <li onClick={()=> setNav(false)} className='text-sm tracking-widest text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors'>Experience</li>
+                        </Link>
                         <Link href='/#skills'>
-                            <li onClick={()=> setNav(false)} className='py-4 text-sm'>Skills</li>
+                            <li onClick={()=> setNav(false)} className='text-sm tracking-widest text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors'>Skills</li>
                         </Link>
-
-                        <Link href='/#projects'>
-                            <li onClick={()=> setNav(false)} className='py-4 text-sm'>Projects</li>
-                        </Link>
-
                     </ul>
 
-                    <div className='pt-40'>
-                        <p className='uppercase tracking-widest text-[#5651e5] pb-6'><b>Let's Connect</b></p>
-                        <div className='flex items-center justify-between my-4 w-full sm:w-[80%]'>
-                            <div className='rounded-full shadow-lg shadow-gray-400 p-4 cursor-pointer hover:scale-105 ease-in duration-150'>
-                                <FaLinkedinIn />
-                            </div>
-
-                            <div className='rounded-full shadow-lg shadow-gray-400 p-4 cursor-pointer hover:scale-105 ease-in duration-150'>
-                                <FaGithub /> 
-                            </div>
-
-                            <div className='rounded-full shadow-lg shadow-gray-400 p-4 cursor-pointer hover:scale-105 ease-in duration-150'>
-                                <AiOutlineMail /> 
-                            </div>
-
-                            <div className='rounded-full shadow-lg shadow-gray-400 p-4 cursor-pointer hover:scale-105 ease-in duration-150'>
-                                <BsYoutube /> 
-                            </div>
-                            
+                    <div className='mt-16'>
+                        <p className='text-xs uppercase tracking-[0.3em] text-neutral-400 dark:text-neutral-500 mb-6'>Connect</p>
+                        <div className='flex items-center gap-4'>
+                            <a href='https://www.linkedin.com/in/vamseecheruvu/' target='_blank' rel='noreferrer'
+                               className='border border-neutral-200 dark:border-white/10 rounded-full p-3 text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:border-neutral-400 dark:hover:border-white/30 transition-all duration-300'>
+                                <FaLinkedinIn size={14} />
+                            </a>
+                            <a href='https://github.com/vamseec21' target='_blank' rel='noreferrer'
+                               className='border border-neutral-200 dark:border-white/10 rounded-full p-3 text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:border-neutral-400 dark:hover:border-white/30 transition-all duration-300'>
+                                <FaGithub size={14} />
+                            </a>
+                            <a href='mailto:vmcheruvu@gmail.com'
+                               className='border border-neutral-200 dark:border-white/10 rounded-full p-3 text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:border-neutral-400 dark:hover:border-white/30 transition-all duration-300'>
+                                <AiOutlineMail size={14} />
+                            </a>
                         </div>
                     </div>
-                    
-
                 </div>
             </div>
-            
         </div>
     </div>
   )

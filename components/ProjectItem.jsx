@@ -2,18 +2,27 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-const ProjectItem = ({title, backgroundImg, projectUrl, tech}) => {
+const ProjectItem = ({title, subtitle, backgroundImg, projectUrl, tech}) => {
   return (
-    <div className='relative flex items-center justify-center h-auto w-full shadow-lg shadow-gray-700 rounded-xl p-4 group hover:bg-gradient-to-r from-[#5651e5] to-[#709dff] '>
-                    <Image className='rounded-xl group-hover:opacity-10 contrast-125' src = {backgroundImg} alt = '/' />
-                    <div className='hidden group-hover:block absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]'>
-                      <h3 className='text-2xl text-white tracking-wider text-center'>{title}</h3>
-                      <p className='pb-4 pt-2 text-white text-center'>{tech}</p>
-                      <Link href={projectUrl}>
-                        <p className='text-center py-3 rounded-lg bg-white text-gray-700 font-bold text-lg cursor-pointer'>More Info</p>
-                      </Link>
-                    </div>
+    <div className='group relative overflow-hidden rounded-lg border border-white/5 hover:border-white/15 transition-all duration-500 cursor-pointer'>
+        <Link href={projectUrl}>
+            <div className='relative h-[300px] overflow-hidden'>
+                <Image
+                    className='object-cover group-hover:scale-105 transition-transform duration-700 ease-out'
+                    src={backgroundImg}
+                    alt={title}
+                    fill
+                />
+                <div className='absolute inset-0 bg-black/40 group-hover:bg-black/70 transition-all duration-500' />
+
+                <div className='absolute bottom-0 left-0 right-0 p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500'>
+                    <p className='text-xs uppercase tracking-[0.2em] text-white/50 mb-2'>{tech}</p>
+                    <h3 className='text-xl font-light text-white'>{title}</h3>
+                    <p className='text-sm text-white/60 mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500'>{subtitle}</p>
                 </div>
+            </div>
+        </Link>
+    </div>
   )
 }
 

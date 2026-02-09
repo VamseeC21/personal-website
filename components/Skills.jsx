@@ -1,166 +1,90 @@
-import Image from 'next/image'
-import React from 'react'
-import Link from 'next/link'
-import htmlImage from '/public/LogosForPersonalWebsite/html.png'
-import cssImage from '/public/LogosForPersonalWebsite/css.png'
-import javascriptImage from '/public/LogosForPersonalWebsite/javascript.png'
-import tailwindImage from '/public/LogosForPersonalWebsite/tailwind.png' 
-import nextjsImage from '/public/LogosForPersonalWebsite/icons8-next.js-48-2.png' 
-import pythonImage from '/public/LogosForPersonalWebsite/pythonLogo.png' 
-import javaImage from '/public/LogosForPersonalWebsite/java.png' 
-import swiftImage from '/public/LogosForPersonalWebsite/Swift_logo.png' 
-import swiftuiImage from '/public/LogosForPersonalWebsite/swiftui-96x96_2x.png' 
+import React, { useState } from 'react'
+import { HiChevronDown } from 'react-icons/hi'
+import Reveal from './Reveal'
 
+const skillCategories = [
+  {
+    title: 'Languages',
+    skills: ['C/C++', 'Python', 'TypeScript', 'JavaScript', 'Java', 'Golang', 'Ruby', 'Swift/SwiftUI', 'SQL', 'HTML/CSS', 'kdb+/q'],
+    defaultOpen: true,
+  },
+  {
+    title: 'Frameworks & Libraries',
+    skills: ['React', 'Next.js', 'Node.js', 'Flask', 'Django', 'Rails', 'NumPy', 'pandas', 'TailwindCSS', 'Storybook.js', 'discord.js'],
+    defaultOpen: true,
+  },
+  {
+    title: 'Tools & Infrastructure',
+    skills: ['Git', 'Docker', 'AWS', 'CI/CD', 'MongoDB', 'PostgreSQL', 'Aurora DB', 'Terraform', 'Jira', 'Agile'],
+    defaultOpen: false,
+  },
+]
 
+const SkillCategory = ({ category, index }) => {
+  const [isOpen, setIsOpen] = useState(category.defaultOpen)
+
+  return (
+    <Reveal delay={index * 100}>
+      <div className='border border-neutral-200 dark:border-white/5 rounded-xl overflow-hidden transition-colors duration-500'>
+        <div
+          onClick={() => setIsOpen(!isOpen)}
+          className='flex items-center justify-between p-5 cursor-pointer select-none
+            hover:bg-neutral-100 dark:hover:bg-white/[0.03] transition-colors duration-300'
+        >
+          <div className='flex items-center gap-3'>
+            <h3 className='text-base font-normal text-neutral-900 dark:text-white'>{category.title}</h3>
+            <span className='text-xs text-neutral-400'>{category.skills.length}</span>
+          </div>
+          <HiChevronDown
+            size={16}
+            className={`text-neutral-400 transition-transform duration-500 ease-out ${
+              isOpen ? 'rotate-180' : 'rotate-0'
+            }`}
+          />
+        </div>
+        <div
+          className={`transition-all duration-500 ease-out overflow-hidden ${
+            isOpen ? 'max-h-[300px] opacity-100' : 'max-h-0 opacity-0'
+          }`}
+        >
+          <div className='px-5 pb-5 border-t border-neutral-100 dark:border-white/5 pt-4'>
+            <div className='flex flex-wrap gap-2'>
+              {category.skills.map((skill, i) => (
+                <span
+                  key={i}
+                  className='text-xs px-3 py-1.5 rounded-full border
+                    border-neutral-200 dark:border-white/10
+                    text-neutral-600 dark:text-neutral-400
+                    hover:border-neutral-400 dark:hover:border-white/25
+                    hover:text-neutral-900 dark:hover:text-white
+                    transition-all duration-300 cursor-default'
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </Reveal>
+  )
+}
 
 const Skills = () => {
   return (
-    <div id='skills' className='w-full lg:h-screen p-2'>
-        <div className='max-w-[1240px] mx-auto flex flex-col justify-center h-full'>
-        <p className='font-bold uppercase text-xl tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-200'><b>Skills</b></p>
-            <h2 className='py-4'>What I Can Do</h2>
-            <div className='grid sm: grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8'>
-            
+    <div id='skills' className='w-full py-24 px-6'>
+        <div className='max-w-[1240px] mx-auto'>
+            <Reveal>
+              <p className='section-heading'>Skills</p>
+              <div className='divider mb-10' />
+              <h2 className='mb-12 font-light'>Technologies I work with</h2>
+            </Reveal>
 
-                <div className='p-6 shadow-md shadow-orange-500 rounded-xl hover:scale-110 ease-in duration-100'>
-                    <div className='grid grid-cols-2 gap-4 justify-center items-center'>
-                        <div className='m-auto'>
-                            <Image 
-                            className=''
-                            src={htmlImage}
-                            alt='/'
-                            width='64px'
-                            height='64px' 
-                            
-                            />
-                        </div>
-                        <div className='flex flex-col items-center justify-center'>
-                            <h3>HTML</h3>
-                        </div>
-                    </div>
-                </div>
-
-                <div className='p-6 shadow-md shadow-blue-500 rounded-xl hover:scale-110 ease-in duration-100'>
-                    <div className='grid grid-cols-2 gap-4 justify-center items-center'>
-                        <div className='m-auto'>
-                            <Image 
-                            className=''
-                            src={cssImage}
-                            alt='/'
-                            width='64px'
-                            height='64px' 
-                            />
-                        </div>
-                        <div className='flex flex-col items-center justify-center'>
-                            <h3>CSS</h3>
-                        </div>
-                    </div>
-                </div>
-
-                <div className='p-6 shadow-md shadow-yellow-300 rounded-xl hover:scale-110 ease-in duration-100'>
-                    <div className='grid grid-cols-2 gap-4 justify-center items-center'>
-                        <div className='m-auto'>
-                            <Image 
-                            className='rounded-xl'
-                            src={javascriptImage}
-                            alt='/'
-                            width='64px'
-                            height='64px' 
-                            />
-                        </div>
-                        <div className='flex flex-col items-center justify-center'>
-                            <h3>JavaScript</h3>
-                        </div>
-                    </div>
-                </div>
-
-                <div className='p-6 shadow-md shadow-blue-500 rounded-xl hover:scale-110 ease-in duration-100'>
-                    <div className='grid grid-cols-2 gap-4 justify-center items-center'>
-                        <div className='m-auto'>
-                            <Image 
-                            className='bg-[#081642] rounded-xl'
-                            src={tailwindImage}
-                            alt='/'
-                            width='64px'
-                            height='64px' 
-                            />
-                        </div>
-                        <div className='flex flex-col items-center justify-center'>
-                            <h3>TailwindCSS</h3>
-                        </div>
-                    </div>
-                </div>
-
-                <div className='p-6 shadow-md shadow-gray-700 rounded-xl hover:scale-110 ease-in duration-100'>
-                    <div className='grid grid-cols-2 gap-4 justify-center items-center'>
-                        <div className='m-auto'>
-                            <Image 
-                            className='rounded-xl'
-                            src={nextjsImage}
-                            alt='/'
-                            width='64px'
-                            height='64px' 
-                            />
-                        </div>
-                        <div className='flex flex-col items-center justify-center'>
-                            <h3>NextJS</h3>
-                        </div>
-                    </div>
-                </div>
-
-                <div className='p-6 shadow-md shadow-blue-800 rounded-xl hover:scale-110 ease-in duration-100'>
-                    <div className='grid grid-cols-2 gap-4 justify-center items-center'>
-                        <div className='m-auto'>
-                            <Image 
-                            className='bg-[#1a264c] rounded-xl'
-                            src={pythonImage}
-                            alt='/'
-                            width='64px'
-                            height='64px' 
-                            />
-                        </div>
-                        <div className='flex flex-col items-center justify-center'>
-                            <h3>Python</h3>
-                        </div>
-                    </div>
-                </div>
-
-                <div className='p-6 shadow-md shadow-orange-500 rounded-xl hover:scale-110 ease-in duration-100'>
-                    <div className='grid grid-cols-2 gap-4 justify-center items-center'>
-                        <div className='m-auto'>
-                            <Image 
-                            className='rounded-xl'
-                            src={swiftImage}
-                            alt='/'
-                            width='64px'
-                            height='64px' 
-                            />
-                        </div>
-                        <div className='flex flex-col items-center justify-center'>
-                            <h3>Swift</h3>
-                        </div>
-                    </div>
-                </div>
-
-                <div className='p-6 shadow-md shadow-blue-500 rounded-xl hover:scale-110 ease-in duration-100'>
-                    <div className='grid grid-cols-2 gap-4 justify-center items-center'>
-                        <div className='m-auto'>
-                            <Image 
-                            className='rounded-xl'
-                            src={swiftuiImage}
-                            alt='/'
-                            width='64px'
-                            height='64px' 
-                            />
-                        </div>
-                        <div className='flex flex-col items-center justify-center'>
-                            <h3>SwiftUI</h3>
-                        </div>
-                    </div>
-                </div>
-
+            <div className='space-y-4 max-w-[700px]'>
+                {skillCategories.map((category, index) => (
+                    <SkillCategory key={index} category={category} index={index} />
+                ))}
             </div>
-
         </div>
     </div>
   )
