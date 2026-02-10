@@ -8,7 +8,7 @@ const experiences = [
     company: 'UpAhead',
     logo: '/logos/upahead-logo.jpeg',
     role: 'Software Engineer Intern',
-    period: 'Aug 2025 - Present',
+    period: 'Aug 2025 - Sep 2025',
     location: 'Remote',
     tech: 'JavaScript, React, Firebase',
     bullets: [
