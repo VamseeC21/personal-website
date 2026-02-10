@@ -30,6 +30,17 @@ const experiences = [
     ],
   },
   {
+    company: 'Susquehanna International Group',
+    logo: '/logos/sig-logo.jpg',
+    role: 'Technology Discovery Day Fellow',
+    period: 'Apr 2025',
+    location: 'Bala Cynwyd, PA',
+    tech: '',
+    bullets: [
+      '1/40 selected to attend Tech Discovery Day at SIG HQ',
+    ],
+  },
+  {
     company: 'JPMorgan Chase',
     logo: '/logos/jpm-logo.webp',
     role: 'Software Engineer Intern',
