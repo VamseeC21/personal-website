@@ -22,6 +22,7 @@ const Main = () => {
             <div className='animate-fade-in-up-delay-2 opacity-0'>
                 <p className='mt-6 text-neutral-500 max-w-[500px] leading-relaxed'>
                     Prev. @ Google, JPMorgan Chase. CS + Business at The Ohio State University.
+                    <br />
                     Building software that matters.
                 </p>
             </div>
